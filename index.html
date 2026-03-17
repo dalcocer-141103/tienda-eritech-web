@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
+  <title>Catálogo Eritech Premium</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <style>
+    :root {
+      --bg-body: #0f171a;
+      --card-bg: #162930;
+      --card-footer: #112026;
+      --eri-light: #9FF1FF;
+      --eri-medium: #4E87A0;
+      --text-main: #ffffff;
+      --text-muted: #b0bec5;
+      --whatsapp: #25D366;
+      --stock-green: #00e676;
+      --stock-amber: #ff9100;
+    }
+    html { scroll-behavior: auto !important; } 
+
+    #eritech-wrapper { 
+    margin: 0; padding: 0; 
+    background-color: var(--bg-body); 
+    font-family: 'Avenir', 'Nunito Sans', sans-serif; 
+    color: var(--text-main); 
+    width: 100%;
+    position: relative;
+}
+    .view-section { 
+       padding: 20px; 
+    max-width: 1400px; 
+    margin: 0 auto; 
+    min-height: auto;
+    height: auto;  
+    box-sizing: border-box;
+    overflow: hidden;
+    }
+    .oculto { display: none !important; }
+    .page-header { text-align: center; margin-bottom: 25px; margin-top: 10px; }
+    .page-title { font-family: 'Poppins', sans-serif; font-size: 1.8rem; font-weight: 700; color: white; margin: 0; }
+    .page-subtitle { color: var(--text-muted); font-size: 0.9rem; margin-top: 5px; }
+    .search-wrapper { display: flex; justify-content: center; margin-bottom: 25px; }
+    .search-input { 
+        width: 100%; max-width: 600px; padding: 12px 20px; 
+        border-radius: 50px; border: 1px solid rgba(255,255,255,0.1); 
+        background: var(--card-bg); color: white; outline: none; 
+        box-sizing: border-box; transition: 0.3s; 
+        font-family: 'Avenir', 'Nunito Sans', sans-serif; font-size: 1rem; text-align: center; 
+    }
+    .search-input:focus { border-color: var(--eri-light); box-shadow: 0 0 20px rgba(159, 241, 255, 0.15); }
+.cat-grid { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 10px; 
+    margin-bottom: 25px; 
+    max-width: 800px; 
+    margin-left: auto;
+    margin-right: auto;
+}
+.cat-card { 
+    background: var(--card-bg); 
+    border: 1px solid rgba(255,255,255,0.1); 
+    padding: 12px 10px; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    transition: 0.3s; 
+    color: var(--text-muted); 
+    font-size: 0.85rem; 
+    font-weight: 600; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 8px; 
+    width: 100%; 
+    box-sizing: border-box;
+}
+.cat-card:hover, .cat-card.active { 
+    background: var(--eri-light); 
+    color: var(--bg-body); 
+    border-color: var(--eri-light);
+    transform: translateY(-2px); 
+}
+@media (min-width: 768px) {
+    .cat-grid {
+        grid-template-columns: repeat(5, 1fr); 
+    }
+}
+    #contenedorSubcategorias { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; min-height: 5px; }
+    .subcat-chip { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; transition: 0.2s; white-space: nowrap; }
+    .subcat-chip:hover, .subcat-chip.active { background: var(--eri-medium); color: white; border-color: var(--eri-medium); }
+    .main-layout { display: grid; gap: 20px; align-items: start; grid-template-columns: 1fr; }
+    @media (min-width: 992px) { .main-layout { grid-template-columns: 240px 1fr; } }
+    .sidebar-wrapper { background: var(--card-bg); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 15px; margin-bottom: 20px; }
+    @media (max-width: 991px) { 
+        .sidebar-wrapper { display: none; } 
+        .sidebar-wrapper.open { display: block; } 
+    }
+    @media (min-width: 992px) { 
+        .sidebar-wrapper { 
+          position: relative;
+        }
+        .sidebar-wrapper::-webkit-scrollbar { display: none; }
+        #btnMobileFilter { display: none !important; }
+    }
+
+    .btn-mobile-filter { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 10px; margin-bottom: 15px; background: var(--card-bg); border: 1px solid var(--eri-light); color: var(--eri-light); border-radius: 8px; font-weight: 700; cursor: pointer; }
+    .filter-section { margin-bottom: 20px; }
+    .filter-title { font-size: 0.85rem; font-weight: 700; color: white; margin-bottom: 8px; display: flex; justify-content: space-between; text-transform: uppercase; }
+    .filter-list { display: flex; flex-direction: column; gap: 4px; }
+    .filter-item { padding: 4px 0; font-size: 0.85rem; color: var(--text-muted); cursor: pointer; display: flex; justify-content: space-between; }
+    .filter-item:hover, .filter-item.active { color: var(--eri-light); }
+    .f-check { width: 12px; height: 12px; border: 1px solid rgba(255,255,255,0.3); border-radius: 2px; margin-right: 8px; display: inline-block; vertical-align: middle; }
+    .filter-item.active .f-check { background: var(--eri-light); border-color: var(--eri-light); }
+    .catalogo-grid { display: grid; gap: 15px; grid-template-columns: 1fr; }
+    @media (min-width: 600px) { .catalogo-grid { grid-template-columns: repeat(2, 1fr); } } 
+    @media (min-width: 1200px) { .catalogo-grid { grid-template-columns: repeat(3, 1fr); } } 
+    .producto-card { background: linear-gradient(145deg, var(--card-bg) 0%, #1a323b 100%); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; overflow: hidden; transition: transform 0.2s; cursor: pointer; }
+    .producto-card:hover { transform: translateY(-4px); border-color: var(--eri-light); }
+    .card-header { padding: 10px 10px 0 10px; display: flex; justify-content: space-between; }
+    .badge-stock { font-size: 0.6rem; padding: 2px 6px; border-radius: 4px; font-weight: 800; text-transform: uppercase; }
+    .st-ok { background: rgba(0, 230, 118, 0.15); color: var(--stock-green); }
+    .st-wait { background: rgba(255, 145, 0, 0.15); color: var(--stock-amber); }
+    .prod-marca { font-size: 0.65rem; color: var(--text-muted); font-weight: 700; }
+    .img-wrapper { padding: 0 10px; height: 160px; display: flex; align-items: center; justify-content: center; position: relative; }
+    .img-bg { background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 60%); position: absolute; width: 100%; height: 100%; top: 0; left: 0; }
+    .producto-img { max-width: 100%; max-height: 140px; object-fit: contain; z-index: 1; }
+    .card-body { padding: 10px; }
+    .sku-card { font-size: 0.7rem; color: var(--eri-light); font-weight: 700; display: block; margin-bottom: 4px; font-family: monospace; }
+    .prod-titulo {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text-main);
+    line-height: 1.3; 
+    height: 52px;       
+    overflow: hidden;  
+    display: block;     
+    margin-bottom: 5px;
+}
+    .card-footer { background-color: var(--card-footer); padding: 10px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; }
+    .monto { font-family: 'Poppins', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--eri-light); }
+    .monto span { font-size: 0.7rem; font-weight: 400; color: var(--text-muted); }
+    .btn-card-action { width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: var(--eri-light); border: 1px solid rgba(255,255,255,0.1); }
+    .pagination-container { display: flex; justify-content: center; gap: 5px; margin-top: 30px; flex-wrap: wrap; }
+    .page-btn { background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); color: var(--text-main); padding: 6px 12px; border-radius: 6px; cursor: pointer; }
+    .page-btn.active { background: var(--eri-light); color: var(--bg-body); font-weight: 700; }
+    .btn-back { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; font-weight: 600; margin-bottom: 20px; cursor: pointer; font-size: 0.9rem; }
+    .btn-back:hover { color: var(--eri-light); }
+    .detalle-layout { 
+        display: grid; grid-template-columns: 1fr; gap: 30px; 
+        background: linear-gradient(145deg, var(--card-bg), #112026); padding: 20px; 
+        border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);
+    }
+    @media (min-width: 900px) { .detalle-layout { grid-template-columns: 1fr 1fr; padding: 40px; } }
+    .detalle-img-box { background: white; border-radius: 12px; padding: 20px; display: flex; align-items: center; justify-content: center; min-height: 250px; }
+    .detalle-img { max-width: 100%; max-height: 300px; object-fit: contain; }
+    .detalle-info { display: flex; flex-direction: column; }
+    .price-big { font-size: 2.2rem; font-weight: 700; font-family: 'Poppins', sans-serif; color: white; }
+    @media(min-width: 900px) { .price-big { font-size: 2.8rem; } }
+    .btn-whatsapp-premium { background: linear-gradient(90deg, #25D366 0%, #128C7E 100%); color: white; text-decoration: none; padding: 14px; border-radius: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 20px; }
+    .tabla-specs { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    .tabla-specs td { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); font-size: 0.85rem; }
+    .tabla-specs td:first-child { color: var(--text-main); font-weight: 600; width: 40%; }
+    .spinner { border: 3px solid rgba(255,255,255,0.1); border-left-color: var(--eri-light); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 40px auto; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.trust-badges-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+.badge-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.badge-icon {
+    color: var(--eri-light);
+    background: rgba(159, 241, 255, 0.1);
+    padding: 8px;
+    border-radius: 50%;
+    font-size: 20px !important;
+}
+.badge-text {
+    display: flex;
+    flex-direction: column;
+}
+.badge-title {
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin: 0;
+}
+.badge-desc {
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    margin: 0;
+}
+@media (max-width: 480px) {
+    .trust-badges-container {
+        grid-template-columns: 1fr;
+    }
+}
+.fav-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 5;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.fav-btn:hover { background: rgba(0, 0, 0, 0.8); transform: scale(1.1); }
+.fav-btn.active .material-icons-outlined { color: #ff5252 !important; font-variation-settings: 'FILL' 1; }
+.fav-btn.active { border-color: #ff5252; }
+.cat-card.fav-active {
+    border-color: #ff5252 !important;
+    color: #ff5252 !important;
+}
+#btn-ver-favoritos { position: relative; }
+.fav-count-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff5252;
+    color: white;
+    font-size: 10px;
+    font-weight: 800;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--bg-body);
+}
+.sort-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+    gap: 10px;
+    align-items: center;
+}
+.sort-select {
+    background: var(--card-bg);
+    color: var(--text-main);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    outline: none;
+    cursor: pointer;
+}
+.sort-select:focus { border-color: var(--eri-light); }
+.btn-clear-favs {
+    background: #0f171a; 
+    color: #ff5252;
+    border: 1px solid #ff5252;
+    padding: 10px 20px;
+    border-radius: 4px; 
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.4s ease;
+    box-shadow: inset 0 0 0 0 #ff5252;
+}
+.btn-clear-favs:hover {
+    background: #ff5252;
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 82, 82, 0.6);
+}
+.btn-clear-favs .material-icons-outlined {
+    font-size: 18px !important;
+}
+.sort-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+.legal-disclaimer {
+    font-size: 0.65rem;
+    color: var(--stock-amber); 
+    margin-top: 5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.9;
+}
+.shipping-alert-box {
+    background: rgba(159, 241, 255, 0.05); 
+    border: 1px solid rgba(159, 241, 255, 0.15);
+    border-left: 3px solid var(--eri-light); 
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin: 20px 0 15px 0; 
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.shipping-text {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.3;}
+.shipping-text strong {
+    color: white;
+    font-weight: 600;}
+.float-cart-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: var(--card-bg);
+    border: 1px solid var(--eri-light);
+    color: var(--eri-light);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    transition: 0.3s;}
+.float-cart-btn:hover { background: var(--eri-light); color: var(--bg-body); }
+.cart-counter {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff5252;
+    color: white;
+    font-size: 11px;
+    font-weight: 800;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--bg-body);
+}.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -450px; 
+    width: 100%;
+    max-width: 400px;
+    height: 100vh;
+    background: #112026; 
+    z-index: 2000;
+    box-shadow: -5px 0 30px rgba(0,0,0,0.8);
+    transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1); 
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid rgba(255,255,255,0.1);}
+.cart-sidebar.open { right: 0;  }
+.cart-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 1999;
+    backdrop-filter: blur(3px); 
+    display: none;}
+.cart-overlay.active { display: block; }
+.cart-header { padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; }
+.cart-body { flex: 1; overflow-y: auto; padding: 20px; }
+.cart-footer { padding: 20px; background: #0f171a; border-top: 1px solid rgba(255,255,255,0.1); }
+.cart-item { display: flex; gap: 10px; margin-bottom: 15px; background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; }
+.cart-item img { width: 50px; height: 50px; object-fit: contain; background: white; border-radius: 4px; }
+.cart-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.cart-title { font-size: 0.8rem; color: white; margin: 0 0 5px 0; font-weight: 600; line-height: 1.2; }
+.cart-controls { display: flex; align-items: center; gap: 10px; }
+.qty-btn { background: rgba(255,255,255,0.1); border: none; color: white; width: 20px; height: 20px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.cart-price { color: var(--eri-light); font-weight: 700; font-size: 0.9rem; }
+.btn-checkout {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(90deg, #25D366 0%, #128C7E 100%);
+    color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer;
+    font-size: 1rem; display: flex; justify-content: center; align-items: center; gap: 10px;}.main-layout {
+    align-items: start !important; }
+.catalogo-grid {
+    grid-auto-rows: min-content;}
+
+    .acciones-container {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+    align-items: stretch; /* Misma altura para ambos */
+}
+
+.qty-selector-detalle {
+    display: flex;
+    align-items: center;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+}
+
+.btn-qty-det {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    width: 40px;
+    height: 100%;
+    cursor: pointer;
+}
+.btn-qty-det:hover { background: rgba(255,255,255,0.1); }
+
+#cantidad-detalle-numero {
+    font-weight: 700;
+    color: var(--eri-light);
+    width: 30px;
+    text-align: center;
+}
+
+.btn-agregar-detalle {
+    flex: 1; /* Ocupa el resto del espacio */
+    background: var(--eri-light);
+    color: var(--bg-body);
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: 0.2s;
+}
+.btn-agregar-detalle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(159, 241, 255, 0.3);
+}
+</style>
+</head>
+<body>
+<div id="eritech-wrapper">
+<div id="inicio-app"></div>
+<section id="vista-catalogo" class="view-section">
+    <div class="page-header">
+        <h1 class="page-title">Catálogo Eritech</h1>
+        <p class="page-subtitle">Soluciones Tecnológicas Empresariales</p>
+    </div>
+    <div class="search-wrapper">
+        <input type="text" id="buscador" class="search-input" placeholder="Buscar por modelo, marca o SKU...">
+    </div>
+    <div class="cat-grid">
+    <div class="cat-card" id="btn-ver-favoritos" onclick="mostrarFavoritos(this)">
+    <span class="material-icons-outlined" style="color:#ff5252">favorite</span> 
+    Mis Favoritos
+    <div id="fav-counter" class="fav-count-badge">0</div>
+</div>
+<div class="cat-card active" onclick="filtrarPrincipal('todo', this)">
+        <span class="material-icons-outlined cat-icon">apps</span> Todo</div>
+        <div class="cat-card" onclick="filtrarPrincipal('computadoras', this)">
+        <span class="material-icons-outlined cat-icon">computer</span> Computadoras</div>
+        <div class="cat-card" onclick="filtrarPrincipal('impresion', this)">
+        <span class="material-icons-outlined cat-icon">print</span> Impresión</div>
+        <div class="cat-card" onclick="filtrarPrincipal('accesorios', this)">
+        <span class="material-icons-outlined cat-icon">headphones</span> Accesorios</div>
+        <div class="cat-card" onclick="filtrarPrincipal('energia', this)">
+        <span class="material-icons-outlined cat-icon">bolt</span> Energía</div>
+        <div class="cat-card" onclick="filtrarPrincipal('redes', this)">
+    <span class="material-icons-outlined cat-icon">router</span> Redes</div>
+<div class="cat-card" onclick="filtrarPrincipal('licencias', this)">
+    <span class="material-icons-outlined cat-icon">verified</span> Licencias</div>
+<div class="cat-card" onclick="filtrarPrincipal('seguridad', this)">
+    <span class="material-icons-outlined cat-icon">videocam</span> Seguridad</div>
+<div class="cat-card" onclick="filtrarPrincipal('componentes', this)">
+    <span class="material-icons-outlined cat-icon">memory</span> Componentes</div> </div>
+<div id="contenedorSubcategorias"></div>
+ <div class="main-layout">
+        <div class="sidebar-container">
+            <button id="btnMobileFilter" class="btn-mobile-filter" onclick="toggleSidebar()">
+                <span class="material-icons-outlined">filter_list</span> Filtrar Resultados </button>
+            <aside id="sidebarWrapper" class="sidebar-wrapper">
+                <div id="sidebarFilters">
+                    <div style="color:var(--text-muted); font-size:0.8rem;">Cargando...</div> </div> </aside> </div>
+        <div class="grid-column">
+          <div class="sort-container">
+    <span style="font-size: 0.8rem; color: var(--text-muted);">Ordenar por:</span>
+    <select id="sort-logic" class="sort-select" onchange="aplicarOrden()">
+    <option value="relevancia">Relevancia (Normal)</option> <option value="p-menor">Precio: Menor a Mayor</option>
+    <option value="p-mayor">Precio: Mayor a Menor</option>
+    <option value="a-z">Nombre: A - Z</option>
+    <option value="z-a">Nombre: Z - A</option>
+</select>
+    <button id="btn-limpiar-favs" class="btn-clear-favs oculto" onclick="limpiarFavoritos()">Limpiar Lista</button>
+</div> <div id="contenedorProductos" class="catalogo-grid">
+                <div class="spinner"></div> </div>
+            <div id="paginacion" class="pagination-container"></div></div> </div></section>
+<section id="vista-detalle" class="view-section oculto">
+    <div onclick="cerrarDetalle()" class="btn-back">
+        <span class="material-icons-outlined">arrow_back</span> Volver al catálogo</div>
+<div class="detalle-layout">
+        <div class="detalle-img-box">
+            <img id="det-img" src="" class="detalle-img" onerror="this.onerror=null; this.src='https://placehold.co/400?text=Sin+Imagen'"></div>
+        <div class="detalle-info">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;"><div>
+                    <span id="det-marca" style="display:inline-block; background:rgba(255,255,255,0.1); padding:4px 8px; border-radius:4px; font-size:0.7rem; font-weight:700; color:var(--eri-light); letter-spacing:1px;">MARCA</span>
+                    <span id="det-sku" style="color:var(--eri-light); font-size:0.85rem; margin-left:8px; font-weight:600; font-family:monospace; opacity:0.9;">SKU: ---</span>  </div>
+                <span id="det-stock" class="badge-stock">STOCK</span></div>
+            <h1 id="det-titulo" style="font-family:'Poppins', sans-serif; margin:0; line-height:1.2; font-size:1.6rem; color:white;">Producto</h1>
+             <div style="margin:20px 0; border-left:3px solid var(--eri-light); padding-left:15px;">
+                <div class="price-big" id="det-precio">$0.00<span>MXN</span></div>
+                
+                <span style="font-size:0.8rem; color:var(--text-muted);">Precio neto. No Incluye I.V.A.</span><div class="legal-disclaimer">
+        * Precio y disponibilidad sujetos a cambios sin previo aviso.</div></div>
+        <div class="acciones-container">
+    <div class="qty-selector-detalle">
+        <button class="btn-qty-det" onclick="cambiarCantDetalle(-1)">−</button>
+        <span id="cantidad-detalle-numero">1</span>
+        <button class="btn-qty-det" onclick="cambiarCantDetalle(1)">+</button>
+    </div>
+
+    <button class="btn-agregar-detalle" onclick="agregarAlCarritoDesdeDetalle()">
+        <span class="material-icons-outlined">shopping_cart</span>
+        Agregar
+    </button>
+</div>
+
+<a id="btn-cotizar-final" ... >
+            <a id="btn-cotizar-final" href="https://wa.me/525515107577" target="_top" class="btn-whatsapp-premium">
+                <span class="material-icons-outlined">whatsapp</span> Solicitar Cotización</a>
+            <div class="trust-badges-container"> <div class="badge-item"><span class="material-icons-outlined badge-icon">local_shipping</span>
+        <div class="badge-text"> <p class="badge-title">Envío Seguro</p>
+         <p class="badge-desc">Envío por cotizar. <br>(Contáctanos para una estimación previa).</br></p></div></div>
+    <div class="badge-item">
+        <span class="material-icons-outlined badge-icon">description</span>
+        <div class="badge-text">
+            <p class="badge-title">Facturamos</p>
+            <p class="badge-desc">Precios + IVA (CFDI 4.0)</p></div></div>
+    <div class="badge-item">
+        <span class="material-icons-outlined badge-icon">verified_user</span>
+        <div class="badge-text">
+            <p class="badge-title">Garantía Total</p>
+            <p class="badge-desc">Directa con fabricante</p></div></div>
+    <div class="badge-item">
+        <span class="material-icons-outlined badge-icon">support_agent</span>
+        <div class="badge-text">
+            <p class="badge-title">Soporte Pro</p>
+            <p class="badge-desc">Atención personalizada</p></div></div></div>
+            <div style="margin-top:30px;">
+                <h4 style="margin-bottom:10px; color:white; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:5px;">Especificaciones</h4>
+                <table class="tabla-specs" id="tabla-specs-completa"></table></div> </div></div></section>
+<div id="cartOverlay" class="cart-overlay" onclick="toggleCarrito()"></div>
+<div class="float-cart-btn" onclick="toggleCarrito()">
+    <span class="material-icons-outlined">shopping_cart</span>
+    <div id="cart-counter-bubble" class="cart-counter" style="display:none;">0</div></div>
+<aside id="cartSidebar" class="cart-sidebar">
+    <div class="cart-header">
+        <h3 style="margin:0; color:white;">Tu Pedido</h3>
+        <span class="material-icons-outlined" style="cursor:pointer; color:var(--text-muted);" onclick="toggleCarrito()">close</span></div>
+    <div id="cartItemsContainer" class="cart-body">
+        <p style="color:var(--text-muted); text-align:center; margin-top:50px;">Tu carrito está vacío.</p></div>
+    <div class="cart-footer">
+        <div style="display:flex; justify-content:space-between; margin-bottom:15px; color:white; font-size:1.1rem; font-weight:700;">
+            <span>Total Aprox:</span>
+            <span id="cartTotal" style="color:var(--eri-light);">$0.00</span></div>
+        <a id="btn-whatsapp-carrito" class="btn-checkout" href="https://wa.me/525515107577" target="_top" style="text-decoration: none;">
+    <span class="material-icons-outlined">whatsapp</span> Cotizar por WhatsApp
+</a></div></aside>
+</div>
+<script>
+const URL_JSON = "https://raw.githubusercontent.com/dalcocer-141103/Catalogo-productos/refs/heads/main/productos.json";
+const TELEFONO = "525515107577"; 
+const ITEMS_POR_PAGINA = 12; 
+let productosGlobal = [];
+let listaFiltrada = []; 
+let listaFinal = [];    
+let paginaActual = 1;
+let categoriaActual = 'todo'; 
+let productoEnVista = null; // Variable para guardar el producto actual
+let cantidadSeleccionada = 1;
+let scrollGuardado = 0;
+let filtrosActivos = { subcategoria: null, marca: null, procesador: null, ram: null, almacenamiento: null };
+const contenedor = document.getElementById('contenedorProductos');
+const contenedorPaginacion = document.getElementById('paginacion');
+const contenedorSub = document.getElementById('contenedorSubcategorias');
+const sidebarFilters = document.getElementById('sidebarFilters');
+const sidebarWrapper = document.getElementById('sidebarWrapper');
+const vistaCatalogo = document.getElementById('vista-catalogo');
+const vistaDetalle = document.getElementById('vista-detalle');
+fetch(URL_JSON).then(res => res.json()).then(data => {    productosGlobal = data;listaFiltrada = data; listaFinal = data;
+        filtrarPrincipal('todo', document.querySelector('.cat-card.active'));
+    })
+    .catch(err => contenedor.innerHTML = '<p style="text-align:center;">Error de conexión.</p>');
+function toggleSidebar() { sidebarWrapper.classList.toggle('open'); }
+let carrito = JSON.parse(localStorage.getItem('eritech_cart')) || [];
+function toggleCarrito() {
+    document.getElementById('cartSidebar').classList.toggle('open');
+    document.getElementById('cartOverlay').classList.toggle('active');
+    renderizarCarrito(); 
+}function agregarAlCarrito(e, prod) {
+    if(e) e.stopPropagation(); 
+    const existente = carrito.find(item => item.sku === (prod.sku || prod.clave));
+    if(existente) {
+        existente.cantidad++;
+    } else {carrito.push({sku: prod.sku || prod.clave,nombre: prod.nombre,precio: prod.precio,imagen: prod.imagen,cantidad: 1
+        });
+    }
+    guardarCarrito();
+    toggleCarrito(); 
+}function actualizarCantidad(sku, cambio) {
+    const item = carrito.find(p => p.sku === sku);
+    if(item) {
+        item.cantidad += cambio;
+        if(item.cantidad <= 0) {
+            carrito = carrito.filter(p => p.sku !== sku);
+        }
+        guardarCarrito();
+        renderizarCarrito();}}
+function guardarCarrito() {
+    localStorage.setItem('eritech_cart', JSON.stringify(carrito));
+    actualizarBurbujaCarrito();}
+function actualizarBurbujaCarrito() {
+    const bubble = document.getElementById('cart-counter-bubble');
+    const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+    bubble.innerText = totalItems;
+    bubble.style.display = totalItems > 0 ? 'flex' : 'none';}
+function renderizarCarrito() {
+    const contenedorCart = document.getElementById('cartItemsContainer');
+    const totalDisplay = document.getElementById('cartTotal');
+    const btnWhatsapp = document.getElementById('btn-whatsapp-carrito'); // <--- NUEVO
+    contenedorCart.innerHTML = '';
+if(carrito.length === 0) {
+        contenedorCart.innerHTML = '<div style="text-align:center; color:#777; margin-top:40px;"><span class="material-icons-outlined" style="font-size:40px; opacity:0.5;">shopping_bag</span><p>Tu carrito está vacío</p></div>';
+        totalDisplay.innerText = "$0.00";
+        btnWhatsapp.href = "javascript:alert('Tu carrito está vacío');"; 
+        btnWhatsapp.style.opacity = "0.5";
+        return;
+    }
+    btnWhatsapp.style.opacity = "1";
+    let totalCalculado = 0;
+    carrito.forEach(item => {
+        const subtotal = item.precio * item.cantidad;
+        totalCalculado += subtotal; 
+        contenedorCart.innerHTML += `
+            <div class="cart-item">
+                <img src="${item.imagen}" onerror="this.onerror=null; this.src='https://placehold.co/50?text=X'">
+                <div class="cart-info">
+                    <div class="cart-title">${item.nombre.substring(0, 40)}...</div>
+                    <div class="cart-controls">
+                        <button class="qty-btn" onclick="actualizarCantidad('${item.sku}', -1)">-</button>
+                        <span style="color:white; font-size:0.9rem;">${item.cantidad}</span>
+                        <button class="qty-btn" onclick="actualizarCantidad('${item.sku}', 1)">+</button>
+                        <span class="cart-price" style="margin-left:auto;">${formatearMoneda(subtotal)}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    totalDisplay.innerText = formatearMoneda(totalCalculado);
+    let mensaje = "Hola *Eritech*, quiero cotizar el siguiente pedido:\n\n";
+    carrito.forEach(item => {
+        mensaje += `▪️ *${item.cantidad}x* ${item.nombre} (SKU: ${item.sku})\n`;
+    });
+    mensaje += "\n¿Me podrían confirmar existencia y envío?";
+
+    btnWhatsapp.href = `https://wa.me/${TELEFONO}?text=${encodeURIComponent(mensaje)}`;
+}
+function normalizarProcesador(txt) {
+    if(!txt) return null;
+    const t = txt.toLowerCase();
+    if(t.includes('i3')) return 'Intel Core i3';
+    if(t.includes('i5')) return 'Intel Core i5';
+    if(t.includes('i7')) return 'Intel Core i7';
+    if(t.includes('i9')) return 'Intel Core i9';
+    if(t.includes('ultra')) return 'Intel Core Ultra';
+    if(t.includes('ryzen 3')) return 'AMD Ryzen 3';
+    if(t.includes('ryzen 5')) return 'AMD Ryzen 5';
+    if(t.includes('ryzen 7')) return 'AMD Ryzen 7';
+    if(t.includes('ryzen 9')) return 'AMD Ryzen 9';
+    if(t.includes('celeron')) return 'Intel Celeron';
+    return null; }
+let favoritos = JSON.parse(localStorage.getItem('eritech_favs')) || [];
+function toggleFavorito(e, sku) {
+    e.stopPropagation(); 
+    const index = favoritos.indexOf(sku);
+    if (index > -1) {
+        favoritos.splice(index, 1);
+    } else {
+        favoritos.push(sku);
+    }
+    localStorage.setItem('eritech_favs', JSON.stringify(favoritos));
+    actualizarContador();
+    if (categoriaActual === 'favoritos') {
+        mostrarFavoritos(document.getElementById('btn-ver-favoritos'));
+    } else {
+        cargarPagina(paginaActual); }}
+function mostrarFavoritos(elemento) {
+    document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('active', 'fav-active'));
+    elemento.classList.add('fav-active');
+    categoriaActual = 'favoritos';
+    filtrosActivos = { subcategoria: null, marca: null, procesador: null, ram: null, almacenamiento: null };
+    contenedorSub.innerHTML = ''; 
+    listaFiltrada = productosGlobal.filter(p => favoritos.includes(p.sku || p.clave));
+    listaFinal = [...listaFiltrada];
+    const btnLimpiar = document.getElementById('btn-limpiar-favs');
+    if(btnLimpiar) btnLimpiar.classList.remove('oculto');
+    generarFiltrosSidebar(listaFiltrada);
+    cargarPagina(1);}
+function actualizarContador() {
+    const contador = document.getElementById('fav-counter');
+    if(!contador) return;
+    contador.innerText = favoritos.length;
+    contador.style.display = favoritos.length > 0 ? 'flex' : 'none';}
+function limpiarFavoritos() {
+    localStorage.removeItem('eritech_favs');
+    favoritos = [];
+    actualizarContador();
+    if (categoriaActual === 'favoritos') {
+        contenedor.innerHTML = '<p style="color:#777; text-align:center; grid-column: 1/-1; padding: 40px;">Lista vaciada con éxito.</p>';
+        listaFiltrada = [];
+        listaFinal = [];
+        document.getElementById('btn-limpiar-favs').classList.add('oculto');}
+    console.log("Favoritos borrados correctamente");}
+function aplicarOrden() {
+    const criterio = document.getElementById('sort-logic').value;
+    listaFinal = [...listaFiltrada]; 
+    if (criterio === 'p-menor') {
+        listaFinal.sort((a, b) => (a.precio || 0) - (b.precio || 0));
+    } else if (criterio === 'p-mayor') {
+        listaFinal.sort((a, b) => (b.precio || 0) - (a.precio || 0));
+    } else if (criterio === 'a-z') {
+        listaFinal.sort((a, b) => a.nombre.localeCompare(b.nombre));
+    } else if (criterio === 'z-a') {
+        listaFinal.sort((a, b) => b.nombre.localeCompare(a.nombre));
+    }
+    cargarPagina(1);}
+const originalMostrarFavoritos = mostrarFavoritos;
+mostrarFavoritos = function(elemento) {
+    originalMostrarFavoritos(elemento);
+    document.getElementById('btn-limpiar-favs').classList.remove('oculto');};
+window.onload = () => {
+    actualizarContador();};
+function normalizarRAM(txt) {
+    if(!txt) return null;
+    const match = txt.match(/(\d+)\s*GB/i);
+    if(match) return `${match[1]} GB`;
+    return null;}
+function normalizarDisco(txt) {
+    if(!txt) return null;
+    if(txt.includes('1 TB') || txt.includes('1000 GB')) return '1 TB';
+    if(txt.includes('512') || txt.includes('480')) return '512 GB';
+    if(txt.includes('256') || txt.includes('240')) return '256 GB';
+    return null;}
+function generarFiltrosSidebar(lista) {
+    sidebarFilters.innerHTML = ''; 
+    crearSeccionFiltro(lista, 'Marcas', 'marca', 'marca');
+    if (categoriaActual === 'todo') return; 
+    if (categoriaActual === 'computadoras') {
+        const procesadores = extraerYAgrupar(lista, ['procesador', 'processor', 'cpu'], normalizarProcesador);
+        if(procesadores.length > 0) renderHTMLFiltro('Procesador', 'procesador', procesadores);
+        const rams = extraerYAgrupar(lista, ['memoria interna', 'ram', 'memoria ram'], normalizarRAM);
+        if(rams.length > 0) renderHTMLFiltro('Memoria RAM', 'ram', rams);
+        const discos = extraerYAgrupar(lista, ['capacidad', 'almacenamiento', 'disco'], normalizarDisco);
+        if(discos.length > 0) renderHTMLFiltro('Almacenamiento', 'almacenamiento', discos);} }
+function extraerYAgrupar(lista, keywords, normalizador) {
+    const conteo = {};
+    lista.forEach(prod => {
+        if(prod.especificaciones) {
+            prod.especificaciones.forEach(spec => {
+                if(keywords.some(k => spec.tipo.toLowerCase().includes(k))) {
+                    const valNormalizado = normalizador(spec.valor);
+                    if(valNormalizado) conteo[valNormalizado] = (conteo[valNormalizado] || 0) + 1;}}); }});
+    return Object.keys(conteo).sort((a,b) => parseInt(a) - parseInt(b));}
+function crearSeccionFiltro(lista, titulo, keyFiltro, propJSON) {
+    const conteo = {};
+    lista.forEach(p => {
+        let val = p[propJSON] || 'Otros';
+        if(val === 'Hewlett Packard') val = 'HP'; 
+        conteo[val] = (conteo[val] || 0) + 1;
+    });
+    const opcionesOrdenadas = Object.keys(conteo).sort((a, b) => {
+        return conteo[b] - conteo[a];
+    });
+    if(opcionesOrdenadas.length > 0) {
+        renderHTMLFiltro(titulo, keyFiltro, opcionesOrdenadas, conteo);
+    }
+}
+function renderHTMLFiltro(titulo, keyFiltro, opciones, conteoObj) {
+    const section = document.createElement('div');
+    section.className = 'filter-section';
+    let clearBtn = filtrosActivos[keyFiltro] ? `<small style="color:var(--eri-light); cursor:pointer;" onclick="limpiarFiltro('${keyFiltro}')">Borrar</small>` : '';
+    section.innerHTML = `<div class="filter-title"><span>${titulo}</span> ${clearBtn}</div>`;
+    const list = document.createElement('div');
+    list.className = 'filter-list';
+    opciones.slice(0, 15).forEach(opt => {
+        const item = document.createElement('div');
+        item.className = `filter-item ${filtrosActivos[keyFiltro] === opt ? 'active' : ''}`;
+        const countSpan = conteoObj ? `<span class="filter-count">${conteoObj[opt]}</span>` : '';
+        item.innerHTML = `<span><span class="f-check"></span>${opt}</span> ${countSpan}`;
+        item.onclick = () => aplicarFiltroSidebar(keyFiltro, opt);
+        list.appendChild(item);
+    });
+    section.appendChild(list);
+    sidebarFilters.appendChild(section);
+}
+function aplicarFiltroSidebar(key, valor) {
+    filtrosActivos[key] = (filtrosActivos[key] === valor) ? null : valor;
+    ejecutarFiltradoFinal();
+    if(window.innerWidth < 992) sidebarWrapper.classList.remove('open');
+}
+
+// Función para el selector + / -
+function cambiarCantDetalle(cambio) {
+    cantidadSeleccionada += cambio;
+    if(cantidadSeleccionada < 1) cantidadSeleccionada = 1;
+    // Opcional: Si quieres limitar al stock real
+    // if(cantidadSeleccionada > productoEnVista.existenciaCUN) cantidadSeleccionada = productoEnVista.existenciaCUN;
+
+    document.getElementById('cantidad-detalle-numero').innerText = cantidadSeleccionada;
+}
+
+// Función para el botón "Agregar" del detalle
+function agregarAlCarritoDesdeDetalle() {
+    if(!productoEnVista) return;
+
+    // Buscamos si ya existe en el carrito
+    const existente = carrito.find(item => item.sku === (productoEnVista.sku || productoEnVista.clave));
+
+    if(existente) {
+        existente.cantidad += cantidadSeleccionada;
+    } else {
+        carrito.push({
+            sku: productoEnVista.sku || productoEnVista.clave,
+            nombre: productoEnVista.nombre,
+            precio: productoEnVista.precio,
+            imagen: productoEnVista.imagen,
+            cantidad: cantidadSeleccionada
+        });
+    }
+
+    guardarCarrito();
+    toggleCarrito(); // Abrimos el carrito para confirmar
+
+    // (Opcional) Cerrar el detalle automáticamente
+    // cerrarDetalle(); 
+}
+function limpiarFiltro(key) {
+    filtrosActivos[key] = null;
+    ejecutarFiltradoFinal();
+}
+function filtrarPorSub(subcategoria, elemento) {
+    document.querySelectorAll('.subcat-chip').forEach(c => c.classList.remove('active'));
+    if(elemento) elemento.classList.add('active');
+    filtrosActivos.subcategoria = subcategoria;
+    filtrosActivos.marca = null; 
+    ejecutarFiltradoFinal();
+}
+function ejecutarFiltradoFinal() {let resultado = listaFiltrada; 
+    if(filtrosActivos.subcategoria) resultado = resultado.filter(p => p.subcategoria === filtrosActivos.subcategoria);
+    if(filtrosActivos.marca) resultado = resultado.filter(p => p.marca === filtrosActivos.marca);
+    if(categoriaActual === 'computadoras') {
+        if(filtrosActivos.procesador || filtrosActivos.ram || filtrosActivos.almacenamiento) {
+            resultado = resultado.filter(p => {
+                if(!p.especificaciones) return false;
+                let cumpleProc = !filtrosActivos.procesador;
+                let cumpleRam = !filtrosActivos.ram;
+                let cumpleDisco = !filtrosActivos.almacenamiento;
+                p.especificaciones.forEach(s => {
+                    const tipo = s.tipo.toLowerCase();
+                    const val = s.valor;
+                    if(filtrosActivos.procesador && (tipo.includes('procesador') || tipo.includes('cpu'))) {
+                        if(normalizarProcesador(val) === filtrosActivos.procesador) cumpleProc = true;
+                    }
+                    if(filtrosActivos.ram && (tipo.includes('ram') || tipo.includes('memoria'))) {
+                        if(normalizarRAM(val) === filtrosActivos.ram) cumpleRam = true;
+                    }
+                    if(filtrosActivos.almacenamiento && (tipo.includes('disco') || tipo.includes('capacidad'))) {
+                        if(normalizarDisco(val) === filtrosActivos.almacenamiento) cumpleDisco = true;
+                    }
+                });
+                return cumpleProc && cumpleRam && cumpleDisco;
+            });
+        }
+    }
+    listaFinal = resultado;
+    if(!filtrosActivos.marca && !filtrosActivos.procesador) generarFiltrosSidebar(listaFiltrada); 
+    cargarPagina(1);
+}
+function filtrarPrincipal(filtro, elemento) {
+  document.getElementById('sort-logic').value = 'relevancia';
+  document.getElementById('btn-limpiar-favs').classList.add('oculto'); // <-- ESTO
+    if(elemento) {
+        document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('active'));
+        elemento.classList.add('active'); }
+    categoriaActual = filtro;
+    filtrosActivos = { subcategoria: null, marca: null, procesador: null, ram: null, almacenamiento: null };
+    if(filtro === 'todo') {
+       listaFiltrada = [...productosGlobal];
+        listaFiltrada.sort((a, b) => (b.existenciaCUN || 0) - (a.existenciaCUN || 0));
+        contenedorSub.innerHTML = ''; 
+    } else { listaFiltrada = productosGlobal.filter(p => {
+            const catLower = (p.categoria || '').toLowerCase();
+            const subLower = (p.subcategoria || '').toLowerCase();
+            const todo = catLower + ' ' + subLower;
+            if (filtro === 'computo') return todo.includes('ensamble') || todo.includes('componente') || todo.includes('almacenamiento');
+            if (filtro === 'computadoras') return todo.includes('computadora') || todo.includes('laptop') || todo.includes('workstation') || todo.includes('all in one') || todo.includes('tablet');
+            if (filtro === 'energia') return todo.includes('energía') || todo.includes('energia') || todo.includes('respaldo') || todo.includes('batería') || todo.includes('regulador') || todo.includes('no break');
+            if (filtro === 'accesorios') return todo.includes('accesorio') || todo.includes('mochila') || todo.includes('mouse') || todo.includes('teclado') || todo.includes('bocina') || todo.includes('audifono') || todo.includes('diadema');
+            if (filtro === 'impresion') return todo.includes('impresi') || todo.includes('tinta') || todo.includes('toner') || todo.includes('cinta');
+            if (filtro === 'redes') {
+                return todo.includes('red') || 
+                       todo.includes('switch') || 
+                       todo.includes('router') || 
+                       todo.includes('access point') || 
+                       todo.includes('bobina') || 
+                       todo.includes('transceptor') ||
+                       todo.includes('cable de red') ||
+                       todo.includes('jack') ||
+                       todo.includes('placa de pared');
+            }
+            if (filtro === 'licencias') {
+                return todo.includes('software') || 
+                       todo.includes('licencia') || 
+                       todo.includes('antivirus') || 
+                       todo.includes('esd') || 
+                       todo.includes('digital') ||
+                       todo.includes('aspel') ||
+                       todo.includes('microsoft');
+            }
+            if (filtro === 'seguridad') {
+                return todo.includes('vigilancia') || 
+                       todo.includes('cámara') || 
+                       todo.includes('camera') || 
+                       todo.includes('dvr') || 
+                       todo.includes('nvr') || 
+                       todo.includes('xvr') || 
+                       todo.includes('cctv') || 
+                       todo.includes('control de acceso') || 
+                       todo.includes('alarma') ||
+                       todo.includes('videoportero');
+            }
+            if (filtro === 'componentes') {
+                return todo.includes('procesador') || 
+                       todo.includes('tarjeta madre') || 
+                       todo.includes('motherboard') || 
+                       todo.includes('memoria ram') || 
+                       todo.includes('ddr') || 
+                       todo.includes('gabinete') || 
+                       todo.includes('fuente de poder') || 
+                       todo.includes('disipador') || 
+                       todo.includes('ventilador') || 
+                       todo.includes('disco duro') || 
+                       todo.includes('ssd') ||
+                       todo.includes('tarjeta de video');}
+            return false;
+        });
+        generarSubcategorias(listaFiltrada);
+    }
+    generarFiltrosSidebar(listaFiltrada);
+    listaFinal = listaFiltrada;
+    cargarPagina(1);
+}function generarSubcategorias(lista) {
+    contenedorSub.innerHTML = '';
+    if(categoriaActual === 'accesorios') {
+        const permitidos = ['mouse', 'teclado', 'mochila', 'audifonos', 'diadema', 'kit'];
+        const subcats = new Set();
+        lista.forEach(p => {
+            if(p.subcategoria) {
+                const subLow = p.subcategoria.toLowerCase();
+                if(permitidos.some(k => subLow.includes(k))) subcats.add(p.subcategoria);
+            }
+        });
+        renderChips(subcats);
+    } 
+    else if(categoriaActual !== 'todo') {
+        const subcats = new Set();
+        lista.forEach(p => { if(p.subcategoria) subcats.add(p.subcategoria); });
+        renderChips(subcats);
+    }
+}function renderChips(setSubcats) {
+    if(setSubcats.size > 0) {
+        const chipTodo = document.createElement('div');
+        chipTodo.className = 'subcat-chip active';
+        chipTodo.innerText = 'Ver todo';
+        chipTodo.onclick = (e) => filtrarPorSub(null, e.target);
+        contenedorSub.appendChild(chipTodo);
+        Array.from(setSubcats).sort().slice(0, 15).forEach(sub => {
+            const chip = document.createElement('div');
+            chip.className = 'subcat-chip';
+            chip.innerText = sub;
+            chip.onclick = (e) => filtrarPorSub(sub, e.target);
+            contenedorSub.appendChild(chip);
+        });
+    }
+}const formatearMoneda = (c) => new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(c);
+function obtenerInfoStock(s) { return (s && Number(s) > 0) ? {t:"Disponible", c:"st-ok"} : {t:"Sobre Pedido", c:"st-wait"}; }
+function cargarPagina(pagina) {
+    paginaActual = pagina;
+    const inicio = (pagina - 1) * ITEMS_POR_PAGINA;
+    const fin = inicio + ITEMS_POR_PAGINA;
+    renderizarProductos(listaFinal.slice(inicio, fin));
+    renderizarControlesPaginacion();
+}function renderizarProductos(lista) {
+    contenedor.innerHTML = '';
+    lista.forEach(prod => {
+        const precio = prod.precio ? formatearMoneda(prod.precio) : "$0.00";
+        const clave = prod.sku || prod.clave || 'S/N';
+        const stockInfo = obtenerInfoStock(prod.existenciaCUN);
+        const esFav = favoritos.includes(clave) ? 'active' : '';
+        const textoPrincipal = prod.descripcion_corta || prod.nombre;
+        const card = document.createElement('div');
+        const zonaSuperior = document.getElementById('vista-catalogo');
+    if (zonaSuperior) {
+        zonaSuperior.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+        card.className = 'producto-card';
+        card.innerHTML = `
+            <div class="card-header">
+                <span class="badge-stock ${stockInfo.c}">${stockInfo.t}</span>
+                <span class="prod-marca">${prod.marca||'ERITECH'}</span>
+            </div>
+            <div class="img-wrapper" onclick="verDetalle(${JSON.stringify(prod).replace(/"/g, '&quot;')})">
+                <div class="fav-btn ${esFav}" onclick="toggleFavorito(event, '${clave}')">
+                    <span class="material-icons-outlined" style="font-size:20px;">favorite</span>
+                </div>
+                <div class="img-bg"></div>
+<img src="${prod.imagen}" 
+     class="producto-img" 
+     loading="lazy"
+     onerror="this.onerror=null; this.src='https://placehold.co/400?text=Sin+Imagen';">
+            </div>
+            <div class="card-body" onclick="verDetalle(${JSON.stringify(prod).replace(/"/g, '&quot;')})">
+                <span class="sku-card">SKU: ${clave}</span>              
+                <h3 class="prod-titulo" title="${textoPrincipal}">${textoPrincipal}</h3>                
+            </div>            
+            <div class="card-footer">
+                <div class="price-group"><span class="monto">${precio}<span> MXN</span></span></div>
+                <div style="display:flex; gap:5px;">
+    <div class="btn-card-action" style="background:var(--eri-light); color:var(--bg-body); border-color:var(--eri-light);" 
+         onclick="agregarAlCarrito(event, ${JSON.stringify(prod).replace(/"/g, '&quot;')})">
+        <span class="material-icons-outlined" style="font-size:18px;">shopping_cart</span>
+    </div>    
+    <div class="btn-card-action">
+        <span class="material-icons-outlined" style="font-size:18px;">arrow_forward</span>
+    </div>
+</div> </div>`; contenedor.appendChild(card);
+    });
+}
+function renderizarControlesPaginacion() {
+    contenedorPaginacion.innerHTML = '';
+    const total = Math.ceil(listaFinal.length / ITEMS_POR_PAGINA);
+    if(total <= 1) return;
+    crearBtnPag('←', paginaActual > 1 ? paginaActual-1 : null);
+    let start = Math.max(1, paginaActual - 2);
+    let end = Math.min(total, start + 4);
+    if(end - start < 4) start = Math.max(1, end - 4);
+    for(let i=start; i<=end; i++) crearBtnPag(i, i, i===paginaActual);
+    crearBtnPag('→', paginaActual < total ? paginaActual+1 : null);
+}
+function crearBtnPag(txt, targetPage, active=false) {
+    const btn = document.createElement('button');
+    btn.innerText = txt;
+    btn.className = `page-btn ${active ? 'active' : ''}`;
+    if(targetPage) btn.onclick = () => cargarPagina(targetPage);
+    else btn.disabled = true;
+    contenedorPaginacion.appendChild(btn);
+}function verDetalle(prod) {
+    productoEnVista = prod; // <--- GUARDAMOS EL PRODUCTO
+    cantidadSeleccionada = 1; // <--- REINICIAMOS CONTADOR
+    document.getElementById('cantidad-detalle-numero').innerText = "1";
+    scrollGuardado = window.scrollY;
+    vistaCatalogo.classList.add('oculto'); 
+    vistaDetalle.classList.remove('oculto'); 
+    const anchor = document.getElementById('inicio-app');
+    if(anchor) anchor.scrollIntoView({ behavior: 'auto' });
+    else window.scrollTo(0,0);
+    const precio = prod.precio ? formatearMoneda(prod.precio) : "$0.00";
+    const clave = prod.sku || prod.clave || 'S/N';
+    const stock = obtenerInfoStock(prod.existenciaCUN);
+    const imagenSegura = (prod.imagen && prod.imagen.length > 5) 
+                         ? prod.imagen 
+                         : 'https://placehold.co/400?text=Eritech';
+                         const imgElement = document.getElementById('det-img');
+    imgElement.src = imagenSegura;
+
+    imgElement.onerror = function() { 
+        this.onerror = null; 
+        this.src = 'https://placehold.co/400?text=Imagen+No+Disponible'; 
+    };
+    document.getElementById('det-img').src = prod.imagen;
+    document.getElementById('det-marca').textContent = prod.marca || 'ERITECH';
+    document.getElementById('det-sku').textContent = `SKU: ${clave}`;
+    document.getElementById('det-titulo').textContent = prod.nombre;
+    document.getElementById('det-precio').innerHTML = `${precio}<span>MXN</span>`;
+    document.getElementById('det-stock').textContent = stock.t;
+    document.getElementById('det-stock').className = `badge-stock ${stock.c}`;
+    const tabla = document.getElementById('tabla-specs-completa');
+    tabla.innerHTML = '';
+    if(prod.especificaciones) {
+        prod.especificaciones.forEach(s => {
+            tabla.innerHTML += `<tr><td>${s.tipo}</td><td>${s.valor}</td></tr>`;
+        });
+    }
+
+    const msg = `Hola, me interesa: ${prod.nombre} (SKU: ${clave}).`;
+    document.getElementById('btn-cotizar-final').href = `https://wa.me/${TELEFONO}?text=${encodeURIComponent(msg)}`;
+}function cerrarDetalle() {
+    vistaDetalle.classList.add('oculto');
+    vistaCatalogo.classList.remove('oculto');
+    setTimeout(() => {
+        window.scrollTo(0, scrollGuardado);
+    }, 10);
+}document.getElementById('buscador').addEventListener('keyup', (e) => {
+  document.getElementById('btn-limpiar-favs').classList.add('oculto');
+    const txt = e.target.value.toLowerCase();
+    listaFiltrada = productosGlobal.filter(p => 
+  p.nombre.toLowerCase().includes(txt) || 
+        (p.marca && p.marca.toLowerCase().includes(txt)) ||
+        (p.sku && p.sku.toLowerCase().includes(txt)) ||
+        (p.clave && p.clave.toLowerCase().includes(txt))
+    );
+    listaFinal = listaFiltrada;
+    filtrosActivos = { subcategoria: null, marca: null, procesador: null, ram: null, almacenamiento: null };
+    document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('active'));
+    contenedorSub.innerHTML = '';
+    
+    categoriaActual = 'busqueda'; 
+    generarFiltrosSidebar(listaFiltrada);
+    cargarPagina(1);
+});
+</script>
+</body>
+</html>
